@@ -5,15 +5,17 @@ import { UpdateClient } from './dtos/update-client.dto'
 import { ResponseObject as IResponse } from './interfaces/response.interface';
 import { Agency } from './dtos/agency.dto';
 import { AuthService } from './auth/services/auth.service';
+import {config} from 'dotenv';
+config();
 @Injectable()
 export class TransportService {
-  private client: ClientProxy;
 
+  private client: ClientProxy;
   constructor(private authService : AuthService) {
     this.client = ClientProxyFactory.create({
       transport: Transport.REDIS,
       options: {
-        url: 'redis://localhost:6379',
+        url: process.env.REDISURI,
       },
     });
   }

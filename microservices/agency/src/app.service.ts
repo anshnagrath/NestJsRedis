@@ -6,6 +6,8 @@ import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { ClientProxyFactory, Transport, ClientProxy } from '@nestjs/microservices';
 import { hashSync } from 'bcrypt';
+import { config } from 'dotenv' ;
+config();
 
 @Injectable()
 export class AppService {
@@ -15,7 +17,7 @@ export class AppService {
    this.clientProxy = ClientProxyFactory.create({
       transport: Transport.REDIS,
       options: {
-        url: 'redis://localhost:6379',
+        url: process.env.REDIS_URI,
       },
     });
 

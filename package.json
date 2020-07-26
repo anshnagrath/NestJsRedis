@@ -1,0 +1,22 @@
+{
+  "name": "redis-microservice",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "install": "chmod 777 ./install.sh && ./install.sh",
+    "deploy": "chmod 777 ./deploy.sh && ./deploy.sh",
+    "start": "npm install && npm run deploy",
+    "down": "pm2 delete all"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anshnagrath/NestJsRedis.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/anshnagrath/NestJsRedis/issues"
+  },
+  "homepage": "https://github.com/anshnagrath/NestJsRedis#readme"
+}

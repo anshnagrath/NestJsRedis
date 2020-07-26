@@ -1,7 +1,9 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+import { config } from 'dotenv'
 async function bootstrap() {
+  config()
   const app = await NestFactory.create(AppModule);
   const options = new DocumentBuilder()
   .setTitle('Assignment')
@@ -11,6 +13,6 @@ async function bootstrap() {
   .build();
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('docs', app, document);
-  await app.listen(3000);
+  await app.listen(process.env.PORT);
 }
 bootstrap();
