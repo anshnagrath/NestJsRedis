@@ -24,7 +24,8 @@ export class TransportService {
     let AgencyAndClient = await this.client.send<IResponse,CreateAgencyAndClientDTO>('Create_Agency_And_Client', data).toPromise();
     let  Token = await this.authService.generateJWT(AgencyAndClient.data.AgencyId);
     if(Token){
-        AgencyAndClient.data['Token'] = 'Bearer ' + Token;
+      console.log(AgencyAndClient,"csdcsdc")
+        AgencyAndClient.data['Authorization'] = 'Bearer ' + Token;
         return AgencyAndClient;
     }else{
         throw Error('Unable To Generate Token')

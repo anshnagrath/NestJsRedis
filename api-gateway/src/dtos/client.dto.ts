@@ -6,6 +6,6 @@ import { ApiProperty } from '@nestjs/swagger'
     Email: string;
     @ApiProperty({ type:String ,description:'Client Phone Number ',required :true})
     PhoneNumber: string;
-    @ApiProperty({ type:String ,description:'Client Total Number',required :true})
+    @ApiProperty({ type:Number ,description:'Client Total Number',required :true})
     TotalBill:number
 }

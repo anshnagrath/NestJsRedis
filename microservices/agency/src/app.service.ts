@@ -26,12 +26,13 @@ export class AppService {
     try{
       let { Client , Agency } = data;
       Agency.Password = hashSync(Agency.Password,5);
+ 
       let createAggency =  new this.agencyModel(Agency);
       let newAggency  =   await createAggency.save();
-  
       if( newAggency  && newAggency._id ){
       let newClient = { ...Client , 'AgencyId' : newAggency._id.toString() };
       let createClient  = await this.clientProxy.send< ClientResponse ,Client>('Create_Client' , newClient).toPromise();
+    
       if(createClient && createClient.statusCode == 201){
         return { statusCode:201 , message:'ok' , data: { 'AgencyId':  newAggency._id , 'ClientId':  createClient.data   }};
       }else{
@@ -41,10 +42,11 @@ export class AppService {
           return { statusCode:500 , message:'internal server error', data : '' };
       }  
       }else{
-        this.logger.log('Error While Creating Agency');
+        this.logger.error('Error While Creating Agency');
         return { statusCode:500 , message:'internal server error', data : '' };
       }
     }catch(e){
+      this.logger.error(e)
       return { statusCode:500 , message:'internal server error', data : '' };
     }
 
