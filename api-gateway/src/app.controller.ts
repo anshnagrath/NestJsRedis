@@ -1,4 +1,4 @@
-import { Controller, Post , Put , Get, Logger ,Body ,Res,UseGuards  } from '@nestjs/common';
+import { Controller, Post , Put , Get, Logger ,Body ,Res,UseGuards, UsePipes, ValidationPipe  } from '@nestjs/common';
 import { TransportService } from './transport.service';
 import { CreateAgencyAndClientDTO } from './dtos/create-agency-client.dto'
 import { UpdateClient } from './dtos/update-client.dto'
@@ -17,6 +17,7 @@ export class AppController {
   @ApiCreatedResponse({ description:'ok' })
   @ApiInternalServerErrorResponse({ description:'Internal Server Error' })
   @ApiBody({ type : CreateAgencyAndClientDTO})
+  @UsePipes(ValidationPipe)
   async createAgencyAndClient(@Body() data : CreateAgencyAndClientDTO , @Res() res : Response ) {
     this.logger.log('Creating Agency And Client ' );
     let serverRes =  await this.transportService.createAgencyAndClient(data);
@@ -30,6 +31,7 @@ export class AppController {
   @ApiTags('Update Client')
   @ApiCreatedResponse({ description:'ok' })
   @ApiBody({ type : UpdateClient})
+  @UsePipes(ValidationPipe)
   @ApiInternalServerErrorResponse({ description:'Internal Server Error' })
   async updateClient(@Body() data : UpdateClient , @Res() res : Response ) {
     this.logger.log('Updating Client');

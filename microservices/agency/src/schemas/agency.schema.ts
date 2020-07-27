@@ -4,7 +4,7 @@ import { Document , Schema as MongooseSchema  } from 'mongoose';
 
 @Schema()
 export class Agency extends Document {
-  @Prop({ required: true , unique:true })
+  @Prop({ required: true })
   Name: string;
 
   @Prop({ required: true })
